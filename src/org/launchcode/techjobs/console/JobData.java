@@ -16,10 +16,36 @@ import java.util.List;
  */
 public class JobData {
 
+
+
     private static final String DATA_FILE = "resources/job_data.csv";
     private static Boolean isDataLoaded = false;
 
     private static ArrayList<HashMap<String, String>> allJobs;
+
+
+    public static ArrayList<HashMap<String, String>> findByValue(String value) {
+
+        // load data, if not already loaded
+        loadData();
+
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+        for (HashMap<String, String> jobListing : allJobs) {
+
+            for(String key: jobListing.keySet()) {
+                if (jobListing.get(key).toLowerCase().contains(value.toLowerCase())) {
+                    jobs.add(jobListing);
+                }
+
+            }
+
+        }
+
+        return jobs;
+    }
+
+
 
     /**
      * Fetch list of all values from loaded data,
